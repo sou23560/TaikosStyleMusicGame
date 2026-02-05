@@ -20,7 +20,7 @@ public class TimingJudegment : MonoBehaviour
     [SerializeField] public float borderline_ryou_ka = 0.2f;
     [SerializeField] public float borderline_ka_huka = 0.5f;
     [SerializeField] public float borderline_huka_null = 1f;
-    [SerializeField] public ComboCounter comboCounter;
+    [SerializeField] public ComboCounter comboCounter = null;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +42,7 @@ public class TimingJudegment : MonoBehaviour
             {
                 Destroy(nearestNote);
             }
-            if(result == JudgmentAnswer.Ka || result ==JudgmentAnswer.Ryo)
+            if(result == JudgmentAnswer.Ka || result == JudgmentAnswer.Ryo)
             {
                 comboCounter.AddCombo(1);
             }
