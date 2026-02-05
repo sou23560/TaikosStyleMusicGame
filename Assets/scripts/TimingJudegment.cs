@@ -113,13 +113,4 @@ public class TimingJudegment : MonoBehaviour
 
 }
 
-        //if (distance < borderline_ryou_ka)
-        //{
-        //    Debug.Log("ryou");
-        //}
-        //if (distance < borderline_ka_huka)
-        //{
-        //    Debug.Log("ka");
-        //}
-        //if(distance < borderline_huka_null)
 
