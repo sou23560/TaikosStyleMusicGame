@@ -1,0 +1,3 @@
+repository "taiko_rebuild/taiko_rebuild@15669474776978@cloud"
+  path "/"
+    smartbranch "/main/Development"
