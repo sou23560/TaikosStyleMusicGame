@@ -3,13 +3,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour
+public class InputManager : MonoBehaviour
 {
     public event Action OnDon;
     public event Action OnKa;
 
     private PlayerInput playerInput;
-
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -19,13 +18,13 @@ public class PlayerInput : MonoBehaviour
     {
         var actions = playerInput.actions;
         actions["Don"].performed += Don;
-        actions["Ka"].performerd += Ka;
+        actions["Ka"].performed += Ka;
     }
     private void OnDisable()
     {
         var actions = playerInput.actions;
         actions["Don"].performed -= Don;
-        actions["Ka"].performerd -= Ka;
+        actions["Ka"].performed -= Ka;
     }
 
     private void Don(InputAction.CallbackContext _)

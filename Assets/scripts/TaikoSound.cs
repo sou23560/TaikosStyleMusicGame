@@ -1,16 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TaikoSound : MonoBehaviour
-
 {
-    private AudioSource audioSorce;
+    [SerializeField] private InputManager inputManager;
+    [SerializeField] private AudioSource DonAudio;
+    [SerializeField] private AudioSource KaAudio;
 
-    // Start is called before the first frame update
-    void Start()
+
+    void OnEnable()
     {
-        audioSorce = GetComponent<AudioSource>();
+        if (inputManager != null)
+        {
+            inputManager.OnDon += PlayDon;
+            inputManager.OnKa += PlayKa;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (inputManager != null)
+        {
+            inputManager.OnDon -= PlayDon;
+            inputManager.OnKa -= PlayKa;
+        }
+    }
+
+    void PlayDon()
+    {
+        Debug.Log("Don!");
+        DonAudio.Play();
+    }
+
+    void PlayKa()
+    {
+        Debug.Log("Ka!");
+        KaAudio.Play();
     }
 }

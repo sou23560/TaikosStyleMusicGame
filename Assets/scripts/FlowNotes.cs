@@ -19,7 +19,7 @@ public class FlowNotes : MonoBehaviour
         GameObject obj = GameObject.Find("ComboCounter");
         comboCounter = obj.GetComponent<ComboCounter>();
 
-        TimingJudegment timingJudegment = target.GetComponent<TimingJudegment>();
+        TimingJudgement timingJudegment = target.GetComponent<TimingJudgement>();
         borderline = timingJudegment.borderline_huka_null;
         targetPos = target.transform.position;
     }
