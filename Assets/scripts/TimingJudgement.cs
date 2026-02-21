@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine;
 
 public enum JudgmentAnswer
 {
@@ -46,7 +45,7 @@ public class TimingJudgement : MonoBehaviour
     // 共通の判定ロジック
     private void ProcessJudgement(string noteTag)
     {
-        GameObject? nearestNote = GetNearestNote(noteTag);
+        GameObject nearestNote = GetNearestNote(noteTag);
         if (nearestNote == null) return;
 
         JudgmentAnswer result = Judge(nearestNote);
@@ -69,12 +68,12 @@ public class TimingJudgement : MonoBehaviour
         }
     }
 
-    GameObject? GetNearestNote(string str)
+    GameObject GetNearestNote(string str)
     {
         var notes = GameObject.FindGameObjectsWithTag(str);
         if (notes.Length == 0) return null;
 
-        GameObject? nearestNote = null;
+        GameObject nearestNote = null;
         float minDistance = float.MaxValue;
 
         foreach (var note in notes)
