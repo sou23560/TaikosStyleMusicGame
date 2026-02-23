@@ -1,0 +1,36 @@
+{
+  "offset": 0.00,
+  "notes": [
+
+    { "time": 2.280, "type": 0 },
+    { "time": 2.660, "type": 1 },
+    { "time": 3.040, "type": 0 },
+    { "time": 3.420, "type": 1 },
+
+    { "time": 3.800, "type": 0 },
+    { "time": 3.990, "type": 0 },
+    { "time": 4.180, "type": 1 },
+    { "time": 4.560, "type": 0 },
+
+    { "time": 5.320, "type": 0 },
+    { "time": 5.700, "type": 1 },
+    { "time": 6.080, "type": 0 },
+    { "time": 6.460, "type": 1 },
+
+    { "time": 7.220, "type": 0 },
+    { "time": 7.410, "type": 0 },
+    { "time": 7.600, "type": 1 },
+    { "time": 7.980, "type": 0 },
+
+    { "time": 9.500, "type": 0 },
+    { "time": 9.880, "type": 0 },
+    { "time": 10.260, "type": 1 },
+    { "time": 10.640, "type": 1 },
+
+    { "time": 11.020, "type": 0 },
+    { "time": 11.210, "type": 0 },
+    { "time": 11.400, "type": 1 },
+    { "time": 11.780, "type": 0 }
+
+  ]
+}

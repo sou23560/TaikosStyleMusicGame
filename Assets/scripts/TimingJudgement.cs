@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum JudgmentAnswer
@@ -15,6 +16,8 @@ public class TimingJudgement : MonoBehaviour
     [SerializeField] public float borderline_ka_huka = 0.5f;
     [SerializeField] public float borderline_huka_null = 1f;
     [SerializeField] public ComboCounter comboCounter = null!;
+
+ 
 
     private void OnEnable()
     {
