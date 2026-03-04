@@ -11,7 +11,7 @@ public enum JudgmentAnswer
 
 public class TimingJudgement : MonoBehaviour
 {
-    [SerializeField] private InputManager inputManager = null!; // 最初のリクエストにあったInputManager
+    [SerializeField] private InputManager inputManager = null!; 
     [SerializeField] public float borderline_ryou_ka = 0.2f;
     [SerializeField] public float borderline_ka_huka = 0.5f;
     [SerializeField] public float borderline_huka_null = 1f;
@@ -21,7 +21,6 @@ public class TimingJudgement : MonoBehaviour
 
     private void OnEnable()
     {
-        // InputManagerのイベントに登録
         if (inputManager != null)
         {
             inputManager.OnDon += HandleDon;
@@ -39,13 +38,13 @@ public class TimingJudgement : MonoBehaviour
         }
     }
 
-    // ドンが押された時の入り口
+    // ドン
     private void HandleDon() => ProcessJudgement("Don");
 
-    // カが押された時の入り口
+    // カ
     private void HandleKa() => ProcessJudgement("Ka");
 
-    // 共通の判定ロジック
+    // 判定
     private void ProcessJudgement(string noteTag)
     {
         GameObject nearestNote = GetNearestNote(noteTag);
