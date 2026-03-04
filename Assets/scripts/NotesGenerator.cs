@@ -1,37 +1,42 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class NotesGenerator : MonoBehaviour
 {
-    [SerializeField] public GameObject donPrefab;
-    [SerializeField] public GameObject kaPrefab;
-    [SerializeField] private AudioSource music ;
-    [SerializeField] private ChartLoader chartLoader;
+    [SerializeField] GameObject donPrefab;
+    [SerializeField] GameObject kaPrefab;
+    [SerializeField] AudioSource music;
+    [SerializeField] ChartLoader chartLoader;
+    [SerializeField] float spawnLeadTime = 1.0f;
 
-    [SerializeField] public float spawnLeadTime = 1.0f; // 何秒前に生成するか
-
-    double songTime = 0;
     private ChartData chart;
-    private double songStartDspTime;
-    private int noteIndex = 0;
-    float offset;
 
-    public void Start()
+    private double songStartDspTime;
+    private double songTime;
+    private double pausedSongTime;
+
+    private int noteIndex = 0;
+    private float offset;
+
+    private bool isPaused = false;
+
+    void Start()
     {
         chart = chartLoader.LoadChart();
+        offset = chart.offset;
+
         songStartDspTime = AudioSettings.dspTime + 1.0;
         music.PlayScheduled(songStartDspTime);
-        songTime = AudioSettings.dspTime - songStartDspTime + offset;
-        offset = chart.offset;
     }
 
     void Update()
     {
         if (chart == null) return;
+        if (isPaused) return;
+
         songTime = AudioSettings.dspTime - songStartDspTime + offset;
 
-        while (noteIndex < chart.notes.Count && chart.notes[noteIndex].time <= songTime + spawnLeadTime)
+        while (noteIndex < chart.notes.Count &&
+               chart.notes[noteIndex].time <= songTime + spawnLeadTime)
         {
             SpawnNote(chart.notes[noteIndex]);
             noteIndex++;
@@ -41,26 +46,30 @@ public class NotesGenerator : MonoBehaviour
     void SpawnNote(NoteData note)
     {
         GameObject prefab = note.type == 0 ? donPrefab : kaPrefab;
-        GameObject obj = Instantiate(prefab, transform.position, transform.rotation);
+        Instantiate(prefab, transform.position, transform.rotation);
     }
 
-    //[SerializeField] private float firstWait = 2f;
-    //[SerializeField] private float period = 3f;
-    //[SerializeField] private GameObject notePrefab;
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-    //    StartCoroutine(FuncCoroutine(firstWait));
-    //}
+    public void Pause()
+    {
+        if (isPaused) return;
 
-    //IEnumerator FuncCoroutine(float wait)
-    //{
-    //    yield return new WaitForSeconds(wait);
-    //    while (true)
-    //    {
-    //        Instantiate(notePrefab,transform.position,transform.rotation);
-    //        yield return new WaitForSeconds(period);
-    //    }
+        isPaused = true;
 
-    //}
+        // 現在の楽曲時間を保存
+        pausedSongTime = AudioSettings.dspTime - songStartDspTime;
+        Time.timeScale = 0f;
+        music.Pause();
+    }
+
+    public void Resume()
+    {
+        if (!isPaused) return;
+
+        isPaused = false;
+
+        // DSP基準を再計算
+        songStartDspTime = AudioSettings.dspTime - pausedSongTime;
+        Time.timeScale = 1f;
+        music.UnPause();
+    }
 }

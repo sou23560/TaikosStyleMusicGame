@@ -6,8 +6,9 @@ public class InputManager : MonoBehaviour
 {
     public event Action OnDon;
     public event Action OnKa;
-
+    public event Action OnPause;
     private PlayerInput playerInput;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -18,12 +19,20 @@ public class InputManager : MonoBehaviour
         var actions = playerInput.actions;
         actions["Don"].performed += Don;
         actions["Ka"].performed += Ka;
+        actions["Pause"].performed += Pause; 
     }
+
+    private void Pause(InputAction.CallbackContext _)
+    {
+        OnPause?.Invoke();
+    }
+
     private void OnDisable()
     {
         var actions = playerInput.actions;
         actions["Don"].performed -= Don;
         actions["Ka"].performed -= Ka;
+        actions["Pause"].performed -= Pause;
     }
 
     private void Don(InputAction.CallbackContext _)
